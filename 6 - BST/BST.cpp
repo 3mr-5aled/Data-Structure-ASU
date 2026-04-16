@@ -57,7 +57,6 @@ void BST<T>::insert(T val)
                     temp->right = newNode;
                     break;
                 }
-
                 else
                     temp = temp->right;
             }
@@ -96,37 +95,37 @@ template <class T>
 void BST<T>::remove(T val)
 {
     assert(contains(val));
-    Node<T> *temp = findNode(val);
 
+    Node<T> *temp = findNode(val);
+    Node<T> *parent = findParent(val);
+
+    // Case 1: Leaf node
     if (temp->left == NULL && temp->right == NULL)
     {
         if (temp == root)
         {
             root = NULL;
         }
+        else if (temp->value < parent->value)
+        {
+            parent->left = NULL;
+        }
         else
         {
-            Node<T> *parent = findParent(temp->value);
-
-            if (temp->value < parent->value)
-            {
-                parent->left = NULL;
-            }
-            else
-            {
-                parent->right = NULL;
-            }
+            parent->right = NULL;
         }
+
         delete temp;
     }
-    else if (temp->left == NULL && temp->right != NULL)
+
+    // Case 2: Only right child
+    else if (temp->left == NULL)
     {
-        Node<T> *parent = findParent(temp->value);
         if (temp == root)
         {
-            root = root->right;
+            root = temp->right;
         }
-        if (temp->value < parent->value)
+        else if (temp->value < parent->value)
         {
             parent->left = temp->right;
         }
@@ -134,15 +133,18 @@ void BST<T>::remove(T val)
         {
             parent->right = temp->right;
         }
+
+        delete temp;
     }
-    else if (temp->left != NULL && temp->right == NULL)
+
+    // Case 3: Only left child
+    else if (temp->right == NULL)
     {
-        Node<T> *parent = findParent(temp->value);
         if (temp == root)
         {
-            root = root->left;
+            root = temp->left;
         }
-        if (temp->value < parent->value)
+        else if (temp->value < parent->value)
         {
             parent->left = temp->left;
         }
@@ -150,13 +152,18 @@ void BST<T>::remove(T val)
         {
             parent->right = temp->left;
         }
+
+        delete temp;
     }
+
+    // Case 4: Two children
     else
     {
         Node<T> *min = findMin(temp->right);
         T minVal = min->value;
-        remove(minVal);
-        temp->value = minVal;
+
+        remove(minVal);       // remove successor
+        temp->value = minVal; // replace value
     }
 }
 
@@ -235,16 +242,19 @@ template <class T>
 Node<T> *BST<T>::findParent(T val)
 {
     assert(contains(val));
-    Node<T> *a = root;
-    Node<T> *b = NULL;
 
-    b = a;
-    while (a->value != val)
+    Node<T> *current = root;
+    Node<T> *parent = NULL;
+
+    while (current->value != val)
     {
-        if (val < a->value)
-            a = a->left;
+        parent = current;
+
+        if (val < current->value)
+            current = current->left;
         else
-            a = a->right;
+            current = current->right;
     }
-    return b;
+
+    return parent;
 }
