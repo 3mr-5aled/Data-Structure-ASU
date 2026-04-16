@@ -7,12 +7,12 @@ class ArrayList
     int size, count;
 
 public:
-    ArrayList();
-    int Length();
-    void Append(T item);
-    void Expand();
-    T at(int index);
-    void Insert(T item, int index);
-    void Remove(int index);
-    ~ArrayList();
+    ArrayList();                    // O(1)
+    int Length();                   // O(1)
+    void Append(T item);            // Amortized O(1), worst-case O(n) when expanding
+    void Expand();                  // O(n)
+    T at(int index);                // O(1)
+    void Insert(T item, int index); // O(n)
+    void Remove(int index);         // O(n)
+    ~ArrayList();                   // O(1)
 };

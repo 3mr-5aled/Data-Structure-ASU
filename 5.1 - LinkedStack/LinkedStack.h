@@ -7,8 +7,8 @@ public:
     T data;
     StackNode<T> *next;
 
-    StackNode(void);
-    StackNode(T);
+    StackNode(void); // O(1)
+    StackNode(T);    // O(1)
 };
 
 template <class T>
@@ -18,10 +18,10 @@ class LinkedStack
     int size;
 
 public:
-    LinkedStack(void);
-    bool isEmpty();
-    void Push(T);
-    T Pop();
-    void Clear();
-    ~LinkedStack(void);
+    LinkedStack(void);  // O(1)
+    bool isEmpty();     // O(1)
+    void Push(T);       // O(1)
+    T Pop();            // O(1)
+    void Clear();       // O(n)
+    ~LinkedStack(void); // O(n)
 };

@@ -29,17 +29,17 @@ private:
     Node<T> *root;
 
 public:
-    BST();
-    bool contains(T);
-    void insert(T);
-    void traverse(Order);
-    void remove(T);
+    BST();                // O(1)
+    bool contains(T);     // O(h), where h is tree height
+    void insert(T);       // O(h)
+    void traverse(Order); // O(n)
+    void remove(T);       // O(h)
 
 private:
-    void inOrder(Node<T> *N);
-    void preOrder(Node<T> *N);
-    void postOrder(Node<T> *N);
-    Node<T> *findNode(T);
-    Node<T> *findMin(Node<T> *N);
-    Node<T> *findParent(T);
+    void inOrder(Node<T> *N);     // O(n)
+    void preOrder(Node<T> *N);    // O(n)
+    void postOrder(Node<T> *N);   // O(n)
+    Node<T> *findNode(T);         // O(h)
+    Node<T> *findMin(Node<T> *N); // O(h)
+    Node<T> *findParent(T);       // O(h)
 };
