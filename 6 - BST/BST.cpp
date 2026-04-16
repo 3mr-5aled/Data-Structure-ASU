@@ -1,27 +1,22 @@
 #include "BST.h"
-#include <assert.h>
 #include <iostream>
-
-using namespace std;
+#include <assert.h>
 
 template <class T>
 Node<T>::Node()
 {
-    value = 0;
-    right = NULL;
-    left = NULL;
+    left = right = NULL;
 }
 
 template <class T>
 Node<T>::Node(T val)
 {
     value = val;
-    right = NULL;
-    left = NULL;
+    left = right = NULL;
 }
 
 template <class T>
-BST<T>::BST()
+BST<T>::BST(void)
 {
     root = NULL;
 }
@@ -29,46 +24,74 @@ BST<T>::BST()
 template <class T>
 bool BST<T>::contains(T val)
 {
-    Node<T> *check = findNode(val);
+    Node<T> *tmp = findNode(val);
+    return (tmp != NULL);
+}
 
-    return check != NULL;
+template <class T>
+Node<T> *BST<T>::findNode(T val)
+{
+    Node<T> *temp = root;
+    while (temp != NULL)
+    {
+        if (temp->value == val)
+        {
+            return temp;
+        }
+
+        if (temp->value > val)
+        {
+            temp = temp->left;
+        }
+        else
+        {
+            temp = temp->right;
+        }
+    }
+
+    return temp;
 }
 
 template <class T>
 void BST<T>::insert(T val)
 {
-    assert(!contains(val));
+    assert(contains(val) == false);
 
-    Node<T> *newNode = new Node<T>(val);
-
+    Node<T> *nodeToBeInserted = new Node<T>(val);
     if (root == NULL)
     {
-        root = newNode;
+        root = nodeToBeInserted;
     }
     else
     {
         Node<T> *temp = root;
         while (true)
         {
-            if (val > temp->value)
+            if (temp->value > val)
             {
-                if (temp->right == NULL)
-                {
-                    temp->right = newNode;
-                    break;
-                }
-                else
-                    temp = temp->right;
-            }
-            if (val < temp->value)
-            {
+                // left
                 if (temp->left == NULL)
                 {
-                    temp->left = newNode;
+                    temp->left = nodeToBeInserted;
                     break;
                 }
                 else
+                {
                     temp = temp->left;
+                }
+            }
+            else
+            {
+                // right
+                if (temp->right == NULL)
+                {
+                    temp->right = nodeToBeInserted;
+                    break;
+                }
+                else
+                {
+                    temp = temp->right;
+                }
             }
         }
     }
@@ -77,18 +100,87 @@ void BST<T>::insert(T val)
 template <class T>
 void BST<T>::traverse(Order order)
 {
-    switch (order)
-    {
-    case Order::InOrder:
+    if (order == INORDER)
         inOrder(root);
-        break;
-    case Order::PreOrder:
+    else if (order == PREORDER)
         preOrder(root);
-        break;
-    case Order::PostOrder:
+    else
         postOrder(root);
-        break;
+}
+
+template <class T>
+void BST<T>::inOrder(Node<T> *node)
+{
+    if (node != NULL)
+    {
+        // left
+        inOrder(node->left);
+        // node
+        cout << node->value << endl;
+        // right
+        inOrder(node->right);
     }
+}
+
+template <class T>
+void BST<T>::preOrder(Node<T> *node)
+{
+    if (node != NULL)
+    {
+        cout << node->value << endl;
+        preOrder(node->left);
+        preOrder(node->right);
+    }
+}
+
+template <class T>
+void BST<T>::postOrder(Node<T> *node)
+{
+    if (node != NULL)
+    {
+        postOrder(node->left);
+        postOrder(node->right);
+        cout << node->value << endl;
+    }
+}
+
+template <class T>
+Node<T> *BST<T>::findParent(T val)
+{
+    Node<T> *b = NULL;
+    Node<T> *a = root;
+
+    while (a != NULL)
+    {
+        if (a->value == val)
+        {
+            break;
+        }
+
+        b = a;
+        if (a->value > val)
+        {
+            a = a->left;
+        }
+        else
+        {
+            a = a->right;
+        }
+    }
+
+    return b;
+}
+
+template <class T>
+Node<T> *BST<T>::findMin(Node<T> *start)
+{
+    Node<T> *minNode = start;
+    while (minNode->left != NULL)
+    {
+        minNode = minNode->left;
+    }
+
+    return minNode;
 }
 
 template <class T>
@@ -96,165 +188,86 @@ void BST<T>::remove(T val)
 {
     assert(contains(val));
 
-    Node<T> *temp = findNode(val);
-    Node<T> *parent = findParent(val);
+    Node<T> *n = findNode(val);
 
-    // Case 1: Leaf node
-    if (temp->left == NULL && temp->right == NULL)
+    if ((n->left == NULL) && (n->right == NULL)) // deleting a leaf node
     {
-        if (temp == root)
+        if (n == root)
         {
             root = NULL;
         }
-        else if (temp->value < parent->value)
-        {
-            parent->left = NULL;
-        }
         else
         {
-            parent->right = NULL;
+            Node<T> *parent = findParent(val);
+            if (val < parent->value)
+                parent->left = NULL;
+            else
+                parent->right = NULL;
         }
-
-        delete temp;
+        delete n;
     }
-
-    // Case 2: Only right child
-    else if (temp->left == NULL)
+    else if ((n->left == NULL) && (n->right != NULL))
     {
-        if (temp == root)
+        Node<T> *parent = findParent(val);
+        if (n == root)
         {
-            root = temp->right;
-        }
-        else if (temp->value < parent->value)
-        {
-            parent->left = temp->right;
+            root = n->right;
         }
         else
         {
-            parent->right = temp->right;
+            if (val < parent->value)
+                parent->left = n->right;
+            else
+                parent->right = n->right;
         }
-
-        delete temp;
+        delete n;
     }
-
-    // Case 3: Only left child
-    else if (temp->right == NULL)
+    else if ((n->left != NULL) && (n->right == NULL))
     {
-        if (temp == root)
-        {
-            root = temp->left;
-        }
-        else if (temp->value < parent->value)
-        {
-            parent->left = temp->left;
-        }
+        Node<T> *parent = findParent(val);
+        if (n == root)
+            root = n->left;
         else
         {
-            parent->right = temp->left;
+            if (val < parent->value)
+                parent->left = n->left;
+            else
+                parent->right = n->left;
         }
-
-        delete temp;
+        delete n;
     }
-
-    // Case 4: Two children
     else
     {
-        Node<T> *min = findMin(temp->right);
-        T minVal = min->value;
+        Node<T> *minNode = findMin(n->right);
+        Node<T> *parent = findParent(minNode->value);
 
-        remove(minVal);       // remove successor
-        temp->value = minVal; // replace value
-    }
-}
+        n->value = minNode->value;
 
-template <class T>
-void BST<T>::inOrder(Node<T> *N)
-{
-    // in order : left , root , right
-    if (N != NULL)
-    {
-        inOrder(N->left);
-        cout << N->value << endl;
-        inOrder(N->right);
-    }
-}
-
-template <class T>
-void BST<T>::preOrder(Node<T> *N)
-{
-    // pre order : root , left , right
-    if (N != NULL)
-    {
-        cout << N->value << endl;
-        preOrder(N->left);
-        preOrder(N->right);
-    }
-}
-
-template <class T>
-void BST<T>::postOrder(Node<T> *N)
-{
-    // in order : left , right, root
-    if (N != NULL)
-    {
-        postOrder(N->left);
-        postOrder(N->right);
-        cout << N->value << endl;
-    }
-}
-
-template <class T>
-Node<T> *BST<T>::findNode(T val)
-{
-    Node<T> *temp = root;
-
-    while (temp != NULL)
-    {
-        if (temp->value == val)
-        {
-            return temp;
-        }
-        else if (val > temp->value)
-        {
-            temp = temp->right;
-        }
+        if (parent == n)
+            parent->right = minNode->right;
         else
-        {
-            temp = temp->left;
-        }
+            parent->left = minNode->right;
+
+        delete minNode;
     }
-    return NULL;
 }
 
 template <class T>
-Node<T> *BST<T>::findMin(Node<T> *N)
+void BST<T>::deleteBST(Node<T> *node)
 {
-    Node<T> *temp = N;
+    if (node == NULL)
+        return;
 
-    while (temp->left != NULL)
-    {
-        temp = temp->left;
-    }
-    return temp;
+    Node<T> *currentTreeNode = node;
+    Node<T> *leftTreeNode = node->left;
+    Node<T> *rightTreeNode = node->right;
+    delete (currentTreeNode);
+    deleteBST(leftTreeNode);
+    deleteBST(rightTreeNode);
 }
 
 template <class T>
-Node<T> *BST<T>::findParent(T val)
+BST<T>::~BST(void)
 {
-    assert(contains(val));
-
-    Node<T> *current = root;
-    Node<T> *parent = NULL;
-
-    while (current->value != val)
-    {
-        parent = current;
-
-        if (val < current->value)
-            current = current->left;
-        else
-            current = current->right;
-    }
-
-    return parent;
+    deleteBST(root);
 }

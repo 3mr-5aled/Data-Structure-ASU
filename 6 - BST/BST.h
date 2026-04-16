@@ -1,13 +1,10 @@
 #pragma once
-#include <iostream>
-
-using namespace std;
-
 enum Order
 {
-    InOrder,
-    PreOrder,
-    PostOrder
+    INORDER = 0,
+    PREORDER = 1,
+    POSTORDER = 2,
+    XOrder = 3
 };
 
 template <class T>
@@ -15,31 +12,33 @@ class Node
 {
 public:
     T value;
-    Node *right;
-    Node *left;
-
+    Node<T> *left, *right;
     Node();
-    Node(T);
+    Node(T val);
 };
 
 template <class T>
 class BST
 {
-private:
     Node<T> *root;
 
 public:
-    BST();                // O(1)
-    bool contains(T);     // O(h), where h is tree height
-    void insert(T);       // O(h)
-    void traverse(Order); // O(n)
-    void remove(T);       // O(h)
+    BST(void);
+    ~BST(void);
 
-private:
-    void inOrder(Node<T> *N);     // O(n)
-    void preOrder(Node<T> *N);    // O(n)
-    void postOrder(Node<T> *N);   // O(n)
-    Node<T> *findNode(T);         // O(h)
-    Node<T> *findMin(Node<T> *N); // O(h)
-    Node<T> *findParent(T);       // O(h)
+    bool contains(T val);
+    Node<T> *findNode(T val);
+    void insert(T val);
+
+    void traverse(Order order);
+
+    void inOrder(Node<T> *node);
+    void preOrder(Node<T> *node);
+    void postOrder(Node<T> *node);
+
+    Node<T> *findParent(T val);
+    Node<T> *findMin(Node<T> *start);
+    void remove(T val);
+
+    void deleteBST(Node<T> *node);
 };
