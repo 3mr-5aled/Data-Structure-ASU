@@ -1,0 +1,61 @@
+# C++ build artifacts
+*.o
+*.obj
+*.exe
+*.out
+*.a
+*.so
+*.dylib
+*.dll
+
+# Debug and profiling files
+*.pdb
+*.ilk
+*.su
+*.gch
+*.dSYM/
+
+# IDE and Editor files
+.vscode/
+.vs/
+*.swp
+*.swo
+*~
+.DS_Store
+*.code-workspace
+
+# Build directories
+build/
+dist/
+bin/
+obj/
+
+# Temporary files
+*.tmp
+*.log
+*.bak
+
+# CMake
+CMakeFiles/
+CMakeCache.txt
+cmake_install.cmake
+Makefile
+
+# Dependencies
+*.lib
+lib/
+
+# Visual Studio Code settings
+settings.json
+launch.json
+
+# Windows
+Thumbs.db
+.directory
+
+# MacOS
+.AppleDouble
+.LSOverride
+
+# Linux
+.~
