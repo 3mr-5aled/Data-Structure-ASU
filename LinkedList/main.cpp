@@ -49,6 +49,8 @@ int main()
     L.InsertAt(1, 100);
     L.DeleteAt(3);
 
+    L.Reverse();
+
     for (int i = 0; i < L.Length(); i++)
         cout << L.At(i) << endl;
 

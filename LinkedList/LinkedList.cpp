@@ -131,6 +131,29 @@ void LinkedList<T>::MoveNode(int val, int pos)
 }
 
 template <class T>
+void LinkedList<T>::Reverse()
+{
+    if (head == NULL || head->next == NULL)
+        return;
+
+    Node<T> *prev = NULL;
+    Node<T> *current = head;
+    Node<T> *nextNode = NULL;
+
+    tail = head;
+
+    while (current != NULL)
+    {
+        nextNode = current->next;
+        current->next = prev;
+        prev = current;
+        current = nextNode;
+    }
+
+    head = prev;
+}
+
+template <class T>
 bool LinkedList<T>::HasCycle()
 {
     Node<T> *slow = head;

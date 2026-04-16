@@ -27,6 +27,7 @@ public:
     void DeleteAt(int);
     void Display();          // Lab 5  additional function
     void MoveNode(int, int); // Lab 5 additional function
+    void Reverse();
     bool HasCycle();
     void CreateCycleToPosition(int);
     void BreakCycle();
