@@ -23,18 +23,26 @@ int main()
         }
     }
 
-    stack<char> s2;
+    // stack<char> s2;
+    // while (!s.empty())
+    // {
+    //     s2.push(s.top());
+    //     s.pop();
+    // }
+
+    // while (!s2.empty())
+    // {
+    //     cout << s2.top();
+    //     s2.pop();
+    // }
+
+    string result = "";
     while (!s.empty())
     {
-        s2.push(s.top());
+        result = s.top() + result;
         s.pop();
     }
-
-    while (!s2.empty())
-    {
-        cout << s2.top();
-        s2.pop();
-    }
+    cout << "Final String: " << result << endl;
 
     return 0;
 }

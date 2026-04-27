@@ -21,7 +21,10 @@ int main()
         {
             for (int i = 0; i < 3; i++)
             {
-                q.pop();
+                if (!q.empty())
+                    q.pop();
+                else
+                    break;
             }
         }
         else if (str[i] == 'r')

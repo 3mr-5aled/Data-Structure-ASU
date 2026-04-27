@@ -9,24 +9,25 @@ void RepeatFunction(string str)
     stack<int> num;
     for (size_t i = 0; i < str.length(); i++)
     {
-        if (i % 2 == 0)
-        {
-            if (str[i] < '0' || str[i] > '9')
-            {
-                cout << "Invalid Input" << endl;
-                return;
-            }
+        int current = str[i];
 
-            num.push(str[i] - '0');
+        if (isalpha(current))
+        {
+            s.push(current);
         }
-        else
+        else if (isdigit(current))
         {
-            int repeatCount = num.top();
-            num.pop();
+            int repeatCount = current - '0'; // Convert char to int
 
-            for (int j = 0; j < repeatCount; j++)
+            if (!s.empty())
             {
-                cout << str[i];
+                char charToRepeat = s.top();
+                s.pop();
+
+                for (int j = 0; j < repeatCount; j++)
+                {
+                    cout << charToRepeat << " ";
+                }
             }
         }
     }
