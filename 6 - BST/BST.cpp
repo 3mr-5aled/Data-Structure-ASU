@@ -34,19 +34,12 @@ Node<T> *BST<T>::findNode(T val)
     Node<T> *temp = root;
     while (temp != NULL)
     {
-        if (temp->value == val)
-        {
-            return temp;
-        }
-
-        if (temp->value > val)
-        {
-            temp = temp->left;
-        }
-        else
-        {
+        if (temp->value < val)
             temp = temp->right;
-        }
+        if (temp->value > val)
+            temp = temp->left;
+        else
+            return temp;
     }
 
     return temp;
@@ -97,6 +90,47 @@ void BST<T>::insert(T val)
     }
 }
 
+// template <class T>
+// void BST<T>::insert(T val)
+// {
+//     if (root == NULL)
+//     {
+//         root = new Node<T>(val);
+//         size++;
+//         return;
+//     }
+//     Node<T> *ptr = root;
+//     Node<T> *parentPtr = root;
+//     while (ptr != NULL)
+//     {
+//         if (val > ptr->value)
+//         {
+//             parentPtr = ptr;
+//             ptr = ptr->right;
+//         }
+//         else if (val < ptr->value)
+//         {
+//             parentPtr = ptr;
+//             ptr = ptr->left;
+//         }
+//         else
+//         {
+//             cout << "The value is already exist " << endl;
+//             return;
+//         }
+//     }
+//     ptr = new Node<T>(val);
+//     if (val > (parentPtr->value))
+//     {
+//         parentPtr->right = ptr;
+//     }
+//     else
+//     {
+//         parentPtr->left = ptr;
+//     }
+//     size++;
+// }
+
 template <class T>
 void BST<T>::traverse(Order order)
 {
@@ -106,6 +140,25 @@ void BST<T>::traverse(Order order)
         preOrder(root);
     else
         postOrder(root);
+}
+
+template <class T>
+int BST<T>::getLevel(T val)
+{
+    Node<T> *temp = root;
+    int level = 0;
+    while (temp != NULL)
+    {
+        if (temp->value < val)
+            temp = temp->right;
+        if (temp->value > val)
+            temp = temp->left;
+        else
+            return level;
+
+        level++;
+    }
+    return -1; // Value not found
 }
 
 template <class T>
@@ -249,6 +302,21 @@ void BST<T>::remove(T val)
             parent->left = minNode->right;
 
         delete minNode;
+    }
+}
+
+template <class T>
+void BST<T>::removeRange(T min, T max)
+{
+    if (min > max)
+        return;
+
+    for (T val = min; val <= max; val++)
+    {
+        if (contains(val))
+        {
+            remove(val);
+        }
     }
 }
 

@@ -6,6 +6,44 @@
 
 using namespace std;
 
+void displaySet(set<int> s)
+{
+    for (set<int>::iterator it = s.begin(); it != s.end(); it++)
+    {
+        cout << *it << endl;
+    }
+}
+
+// lab task
+void RemoveRange(set<int> &s, int min, int max)
+{
+    set<int>::iterator it = s.begin();
+    while (it != s.end())
+    {
+        if (*it >= min && *it <= max)
+        {
+            it = s.erase(it); // erase returns an iterator to the next element
+        }
+        else
+        {
+            it++;
+        }
+    }
+}
+
+int CountRange(set<int> s, int min, int max)
+{
+    int count = 0;
+    for (set<int>::iterator it = s.begin(); it != s.end(); it++)
+    {
+        if (*it >= min && *it <= max)
+        {
+            count++;
+        }
+    }
+    return count;
+}
+
 int main()
 {
     // SETS - a collection of unique values

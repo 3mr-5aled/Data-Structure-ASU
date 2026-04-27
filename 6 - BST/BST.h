@@ -40,5 +40,8 @@ public:
     Node<T> *findMin(Node<T> *start);
     void remove(T val);
 
+    void removeRange(T min, T max); // lab task
+    int getLevel(T val);            // lab task
+
     void deleteBST(Node<T> *node);
 };
