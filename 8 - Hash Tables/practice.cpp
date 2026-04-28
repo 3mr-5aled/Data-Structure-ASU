@@ -3,33 +3,30 @@
 
 using namespace std;
 
-int RepeatedAlert(vector<int> &zones, int k)
-{
-    unordered_map<int, int> lastSeen;
-    int count = 0;
-
-    for (int i = 0; i < zones.size(); i++)
-    {
-        int z = zone[i];
-        if (lastSeen.find(z) != lastSeen.end())
-        {
-            if (i - lastSeen[z] <= k)
-            {
-                count++;
-            }
-        }
-        lastSeen[z] = i;
-    }
-    return count;
-}
-
 int main()
 {
 
-    vector<int> zones = {1, 3, 1, 4, 1, 3};
-    int k = 2;
+    unordered_map<char, int> LetterCounter;
+    string str = "helloworld";
 
-    cout << "Repeated ALerts: " << RepeatedAlert(zones, k) << endl;
+    unordered_map<char, int>::iterator it;
+    for (int i = 0; i < str.length(); i++)
+    {
+        it = LetterCounter.find(str[i]);
+        if (it != LetterCounter.end())
+        {
+            LetterCounter[str[i]]++;
+        }
+        else
+        {
+            LetterCounter[str[i]] = 1;
+        }
+    }
+
+    for (auto it = LetterCounter.begin(); it != LetterCounter.end(); it++)
+    {
+        cout << it->first << "," << it->second << endl;
+    }
 
     return 0;
 }
