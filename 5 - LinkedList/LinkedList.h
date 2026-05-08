@@ -14,11 +14,11 @@ public:
 template <class T>
 class LinkedList
 {
+public:
     int count;
     Node<T> *head;
     Node<T> *tail;
 
-public:
     LinkedList();                    // O(1)
     int Length();                    // O(1)
     T At(int);                       // O(n)

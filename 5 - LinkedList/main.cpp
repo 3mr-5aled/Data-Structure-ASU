@@ -40,6 +40,37 @@ void BrainstormCycleDetection()
     demo.BreakCycle();
 }
 
+void summedList(LinkedList<int> l)
+{
+    if (l.head == nullptr || l.head->next == nullptr)
+    {
+        return;
+    }
+    Node<int> *curr = l.head;
+
+    while (curr->next != nullptr)
+    {
+        curr->value += curr->next->value;
+        if (curr->next->next == nullptr)
+        {
+            delete curr->next;
+            curr->next = nullptr;
+            break;
+        }
+
+        curr = curr->next;
+    }
+
+    // display list
+    Node<int> *temp = l.head;
+    while (temp != nullptr)
+    {
+        cout << temp->value << " ";
+        temp = temp->next;
+    }
+    cout << endl;
+}
+
 int main()
 {
     LinkedList<int> L;
@@ -55,6 +86,15 @@ int main()
         cout << L.At(i) << endl;
 
     BrainstormCycleDetection();
+
+    LinkedList<int> l;
+    l.Append(2);
+    l.Append(4);
+    l.Append(6);
+    l.Append(3);
+    l.Append(3);
+
+    summedList(l);
 
     return 0;
 }

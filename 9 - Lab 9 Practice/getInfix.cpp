@@ -1,0 +1,47 @@
+#include <iostream>
+#include <stack>
+#include <string>
+
+using namespace std;
+
+bool isOperand(char c)
+{
+    return (c >= 'a' && c <= 'z') ||
+           (c >= 'A' && c <= 'Z') ||
+           (c >= '0' && c <= '9');
+}
+
+string getInfix(string exp)
+{
+    stack<string> s;
+    for (int i = 0; i < exp.size(); i++)
+    {
+        // Push operands
+        if (isOperand(exp[i]))
+        {
+            string op(1, exp[i]);
+            s.push(op);
+        }
+        // We assume that input is a valid postfix and expect an operator.
+        else
+        {
+            string op1 = s.top();
+            s.pop();
+            string op2 = s.top();
+            s.pop();
+            s.push("(" + op2 + exp[i] + op1 + ")");
+        }
+    }
+    // There must be a single element in stack now which is the required
+    // infix.
+    return s.top();
+}
+
+int main()
+{
+
+    getInfix("abc++");
+    getInfix("ab*c+");
+
+    return 0;
+}
