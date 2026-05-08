@@ -3,7 +3,29 @@
 
 #include <cassert>
 #include <stack>
-#include "Undo.h"
+
+template <class t>
+class Undo
+{
+public:
+    int pos;
+    string name;
+    Node<t> *nodes = nullptr;
+
+    Undo(int p, string n)
+    {
+        this->pos = p;
+        this->name = n;
+        nodes = nullptr;
+    }
+
+    Undo(int p, string n, Node<t> *d)
+    {
+        this->pos = p;
+        this->name = n;
+        this->nodes = d;
+    }
+};
 
 template <class t>
 class Node
