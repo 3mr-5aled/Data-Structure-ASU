@@ -18,14 +18,10 @@ class LinkedStack
     int size;
 
 public:
-    LinkedStack(void);             // O(1)
-    bool isEmpty();                // O(1)
-    void Append(T);                // O(1)
-    void insertAt(T val, int pos); // O(n)
-    T Pop();                       // O(1)
-    void remove(int pos);          // O(n)
-    void MoveNode(T val, int pos); // O(n)
-    void Display();                // O(n)
-    void Clear();                  // O(n)
-    ~LinkedStack(void);            // O(n)
+    LinkedStack(void);  // O(1)
+    bool isEmpty();     // O(1)
+    void Push(T);       // O(1)
+    T Pop();            // O(1)
+    void Clear();       // O(n)
+    ~LinkedStack(void); // O(n)
 };
