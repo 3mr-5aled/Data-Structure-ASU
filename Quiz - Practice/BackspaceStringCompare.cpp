@@ -1,58 +1,59 @@
 #include <iostream>
 #include <stack>
-#include <string>
 
 using namespace std;
 
-void Compare(string str)
+void BackspaceCompare(string str)
 {
-    stack<char> s1;
-    stack<char> s2;
-
-    bool isString2 = false;
-    for (int i = 0; i < str.length(); i++)
+    stack<int> s1;
+    stack<int> s2;
+    bool secondInput = false;
+    for (char w : str)
     {
-        if (str[i] == ' ')
-            isString2 = true;
-        if (!isString2)
+        if (w == ' ')
+            secondInput = true;
+
+        if (!secondInput)
         {
-            if (str[i] == '#')
+            if (w == '#')
             {
-                s1.pop();
+                if (!s1.empty())
+                {
+                    s1.pop();
+                }
             }
-            else
-            {
-                s1.push(str[i]);
-            }
+            s1.push(w);
         }
         else
         {
-            if (str[i] == '#')
-            {
-                s2.pop();
-            }
-            else
-            {
 
-                s2.push(str[i]);
+            if (w == '#')
+            {
+                if (!s2.empty())
+                {
+                    s2.pop();
+                }
             }
+            s2.push(w);
         }
     }
-    bool isIdentical = true;
-    while (!s1.empty() && !s2.empty())
+
+    bool same = true;
+    while (!s1.empty())
     {
-        if (s1.top() == s2.top())
+        if (s1.top() != s2.top())
+        {
+            same = false;
+            break;
+        }
+        else
         {
             s1.pop();
             s2.pop();
         }
-        else
-        {
-            isIdentical = false;
-            break;
-        }
     }
-    if (isIdentical)
+
+    if (same)
         cout << "Identical" << endl;
     else
         cout << "Different" << endl;
@@ -61,20 +62,11 @@ void Compare(string str)
 int main()
 {
 
-    string input;
-    while (true)
-    {
-        getline(cin, input);
-        if (input == "-1")
-        {
-            break;
-        }
-        if (input.empty())
-        {
-            continue;
-        }
-        Compare(input);
-    }
+    string str = "ab#c ad#c";
+    BackspaceCompare(str);
+    string str2 = "abb#c adb#c";
+    BackspaceCompare(str2);
 
+    system("pause");
     return 0;
 }

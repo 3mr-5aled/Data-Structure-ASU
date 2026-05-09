@@ -3,30 +3,32 @@
 
 using namespace std;
 
-queue<int> replace(queue<int> &q, int c, int r)
+template <class T>
+queue<T> ReplaceQueue(queue<T> &q, int c, int r)
 {
-    queue<int> newQueue;
-    while (!q.empty())
+    int size = q.size();
+    for (int i = 0; i < size; i++)
     {
-        if (q.front() > c)
+        int current = q.front();
+        if (current > c)
         {
-            newQueue.push(c);
+            q.push(c);
         }
-        else if (q.front() == c)
+        else if (current == c)
         {
-            newQueue.push(r);
+            q.push(r);
         }
         else
         {
-            newQueue.push(q.front());
+            q.push(current);
         }
         q.pop();
     }
 
-    return newQueue;
+    return q;
 }
 
-void displayQueue(queue<int> q)
+void printQueue(queue<int> q)
 {
     while (!q.empty())
     {
@@ -42,12 +44,11 @@ int main()
     int arr[] = {2, 11, 3, 15, 10, 4};
     for (int x : arr)
         q.push(x);
-    int c = 10, r = 1;
-    cout << "c= " << c << ", r=" << r << endl;
+    int c = 10;
+    int r = 1;
+    q = ReplaceQueue(q, c, r);
 
-    displayQueue(q);
-    q = replace(q, c, r);
-    displayQueue(q);
-
+    printQueue(q);
+    system("pause");
     return 0;
 }

@@ -10,8 +10,6 @@ queue<int> modifyQueue(queue<int> &q)
     for (int i = 0; i < size; i++)
     {
         int current = q.front();
-        q.pop();
-
         if (current % 2 == 0)
         {
             if (current < 10)
@@ -23,6 +21,7 @@ queue<int> modifyQueue(queue<int> &q)
                 q.push(current);
             }
         }
+        q.pop();
     }
 
     return q;

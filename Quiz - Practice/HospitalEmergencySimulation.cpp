@@ -3,13 +3,19 @@
 
 using namespace std;
 
-int main()
+template <class T>
+void printQueue(queue<T> q)
 {
-    int numOfRooms = 5;
-    queue<int> q;
-    int arr[] = {3, 2, 1, 3, 2, 1, 1};
-    for (int x : arr)
-        q.push(x);
+    while (!q.empty())
+    {
+        cout << q.front() << " ";
+        q.pop();
+    }
+    cout << endl;
+}
+
+void Emergency(queue<int> &q, int numOfRooms)
+{
 
     int size = q.size();
 
@@ -46,11 +52,19 @@ int main()
         }
     }
 
-    while (!q.empty())
-    {
-        cout << q.front() << " ";
-        q.pop();
-    }
+    printQueue(q);
+}
 
+int main()
+{
+    int numOfRooms = 5;
+    queue<int> q;
+    int arr[] = {3, 2, 1, 3, 2, 1, 1};
+    for (int x : arr)
+        q.push(x);
+
+    Emergency(q, numOfRooms);
+
+    system("pause");
     return 0;
 }
