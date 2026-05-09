@@ -50,10 +50,11 @@ void BST<T>::insert(T val)
 {
     assert(contains(val) == false);
 
-    Node<T> *nodeToBeInserted = new Node<T>(val);
+    Node<T> *newNode = new Node<T>(val);
     if (root == NULL)
     {
-        root = nodeToBeInserted;
+        root = newNode;
+        return;
     }
     else
     {
@@ -65,7 +66,7 @@ void BST<T>::insert(T val)
                 // left
                 if (temp->left == NULL)
                 {
-                    temp->left = nodeToBeInserted;
+                    temp->left = newNode;
                     break;
                 }
                 else
@@ -78,7 +79,7 @@ void BST<T>::insert(T val)
                 // right
                 if (temp->right == NULL)
                 {
-                    temp->right = nodeToBeInserted;
+                    temp->right = newNode;
                     break;
                 }
                 else

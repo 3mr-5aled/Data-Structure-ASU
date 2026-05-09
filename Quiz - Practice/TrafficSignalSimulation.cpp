@@ -15,7 +15,10 @@ int main()
     {
         if (str[i] == 'y')
         {
-            q.pop();
+            if (!q.empty())
+                q.pop();
+            else
+                break;
         }
         else if (str[i] == 'g')
         {
