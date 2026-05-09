@@ -1,5 +1,8 @@
 #include "LinkedList.h"
+#include <iostream>
 #include <assert.h>
+
+using namespace std;
 
 template <class T>
 Node<T>::Node()
@@ -97,18 +100,20 @@ void LinkedList<T>::DeleteAt(int pos)
     count--;
 }
 
+// extra
 template <class T>
 void LinkedList<T>::Display()
 {
     Node<T> *tmp = head;
     while (tmp != NULL)
     {
-        std::cout << tmp->value;
-        std::cout << std::endl;
+        cout << tmp->value;
+        cout << endl;
         tmp = tmp->next;
     }
 }
 
+// extra
 template <class T>
 void LinkedList<T>::MoveNode(int val, int pos)
 {
@@ -130,6 +135,7 @@ void LinkedList<T>::MoveNode(int val, int pos)
     }
 }
 
+// extra
 template <class T>
 void LinkedList<T>::Reverse()
 {
@@ -153,6 +159,7 @@ void LinkedList<T>::Reverse()
     head = prev;
 }
 
+// extra
 template <class T>
 bool LinkedList<T>::HasCycle()
 {
@@ -171,6 +178,7 @@ bool LinkedList<T>::HasCycle()
     return false;
 }
 
+// extra
 template <class T>
 void LinkedList<T>::CreateCycleToPosition(int pos)
 {
@@ -185,6 +193,7 @@ void LinkedList<T>::CreateCycleToPosition(int pos)
     tail->next = target;
 }
 
+// extra
 template <class T>
 void LinkedList<T>::BreakCycle()
 {
@@ -226,7 +235,9 @@ void LinkedList<T>::BreakCycle()
 template <class T>
 LinkedList<T>::~LinkedList(void)
 {
+    // extra: ensure we break any cycles before trying to delete nodes
     BreakCycle();
+
     while (count != 0)
         DeleteAt(0);
 }

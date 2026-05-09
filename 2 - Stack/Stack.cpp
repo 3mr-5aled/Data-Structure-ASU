@@ -33,10 +33,22 @@ void Stack<T>::push(T val)
 template <class T>
 T Stack<T>::pop()
 {
-    if (isEmpty())
-    {
-        return -1;
-    }
+    assert(!empty());
+    elements--;
+    return arr[elements];
+}
+
+template <class T>
+T Stack<T>::top()
+{
+    assert(!empty());
+    return arr[elements - 1];
+}
+
+template <class T>
+T Stack<T>::pop()
+{
+    assert(!empty());
     elements--;
     return arr[elements];
 }

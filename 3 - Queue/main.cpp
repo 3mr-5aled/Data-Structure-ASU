@@ -1,7 +1,8 @@
 #include <iostream>
+#include <queue>
 #include <deque>
-#include "Queue.h"
 #include <string>
+#include "Queue.h"
 #include "Queue.cpp"
 
 using namespace std;
@@ -91,5 +92,18 @@ int main()
     {
         cout << task.ID << " - " << task.name << endl;
     }
+
+    // using queue from STL
+    queue<int> Q;
+    Q.push(10);
+    Q.push(20);
+    Q.push(30);
+
+    while (!Q.empty())
+    {
+        cout << Q.front() << endl;
+        Q.pop();
+    }
+
     return 0;
 }

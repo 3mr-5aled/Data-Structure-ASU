@@ -8,10 +8,9 @@ template <class T>
 Queue<T>::Queue(int size)
 {
     capacity = size;
-    arr = new T[capacity];
-    front = -1;
-    back = -1;
+    front = back = -1;
     elements = 0;
+    arr = new T[capacity];
 }
 
 template <class T>

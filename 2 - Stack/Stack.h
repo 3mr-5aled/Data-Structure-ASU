@@ -11,6 +11,7 @@ public:
     Stack(int size);
     void push(T val);
     T pop();
+    T top();
     void expand();
     bool isEmpty();
     ~Stack();
