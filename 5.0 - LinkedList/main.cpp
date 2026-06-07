@@ -1,6 +1,10 @@
 #include <iostream>
 #include "LinkedList.h"
 #include "LinkedList.cpp"
+#include "CircularLinkedList.h"
+#include "CircularLinkedList.cpp"
+#include "DoublyLinkedList.h"
+#include "DoublyLinkedList.cpp"
 
 using namespace std;
 
@@ -40,7 +44,7 @@ void BrainstormCycleDetection()
     demo.BreakCycle();
 }
 
-void summedList(LinkedList<int> l)
+void summedList(LinkedList<int> &l)
 {
     if (l.head == nullptr || l.head->next == nullptr)
     {
@@ -55,6 +59,8 @@ void summedList(LinkedList<int> l)
         {
             delete curr->next;
             curr->next = nullptr;
+            l.tail = curr;
+            l.count--;
             break;
         }
 
@@ -69,6 +75,34 @@ void summedList(LinkedList<int> l)
         temp = temp->next;
     }
     cout << endl;
+}
+
+void DemoCircularLinkedList()
+{
+    CircularLinkedList<int> list;
+    list.Append(1);
+    list.Append(2);
+    list.Append(3);
+    list.InsertAt(1, 99);
+    list.DeleteAt(2);
+    list.Reverse();
+
+    cout << "Circular linked list:" << endl;
+    list.Display();
+}
+
+void DemoDoublyLinkedList()
+{
+    DoublyLinkedList<int> list;
+    list.Append(10);
+    list.Append(20);
+    list.Append(30);
+    list.InsertAt(1, 15);
+    list.DeleteAt(2);
+    list.Reverse();
+
+    cout << "Doubly linked list:" << endl;
+    list.Display();
 }
 
 int main()
@@ -95,6 +129,10 @@ int main()
     l.Append(3);
 
     summedList(l);
+
+    cout << "\n=== Circular and Doubly Linked List Demos ===\n";
+    DemoCircularLinkedList();
+    DemoDoublyLinkedList();
 
     return 0;
 }
