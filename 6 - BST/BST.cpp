@@ -167,11 +167,8 @@ void BST<T>::inOrder(Node<T> *node)
 {
     if (node != NULL)
     {
-        // left
         inOrder(node->left);
-        // node
         cout << node->value << endl;
-        // right
         inOrder(node->right);
     }
 }
@@ -201,28 +198,28 @@ void BST<T>::postOrder(Node<T> *node)
 template <class T>
 Node<T> *BST<T>::findParent(T val)
 {
-    Node<T> *b = NULL;
-    Node<T> *a = root;
+    Node<T> *parent = NULL;
+    Node<T> *child = root;
 
-    while (a != NULL)
+    while (child != NULL)
     {
-        if (a->value == val)
+        if (child->value == val)
         {
             break;
         }
 
-        b = a;
-        if (a->value > val)
+        parent = child;
+        if (child->value > val)
         {
-            a = a->left;
+            child = child->left;
         }
         else
         {
-            a = a->right;
+            child = child->right;
         }
     }
 
-    return b;
+    return parent;
 }
 
 template <class T>
@@ -309,8 +306,7 @@ void BST<T>::remove(T val)
 template <class T>
 void BST<T>::removeRange(T min, T max)
 {
-    if (min > max)
-        return;
+    assert(min <= max);
 
     for (T val = min; val <= max; val++)
     {
