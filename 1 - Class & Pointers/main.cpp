@@ -34,5 +34,19 @@ int main()
     delete p2; // deallocate memory allocated to p2 (original memory)
     // Note: Deleting p1 does not affect p2, but deleting p2 will free the memory that p1 was originally pointing to. After deleting p1, it is important to set it to nullptr to avoid dangling pointer issues.
 
+    // Arrays and Pointers
+    int numbers[10] = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
+    int *nPtr = numbers; // nPtr points to the first element of the array
+
+    for (int i = 0; i < 10; i++)
+    {
+        // pointer/subscript notation
+        cout << numbers[i];
+        cout << nPtr[i];
+        // pointer/offset notation
+        cout << *(nPtr + i);
+        cout << *(numbers + i) << endl;
+    }
+
     return 0;
 }
