@@ -1,6 +1,8 @@
 #include <iostream>
 #include "LinkedList.h"
 #include "LinkedList.cpp"
+#include "CycleLinkedList.h"
+#include "CycleLinkedList.cpp"
 #include "CircularLinkedList.h"
 #include "CircularLinkedList.cpp"
 #include "DoublyLinkedList.h"
@@ -27,7 +29,7 @@ void BrainstormCycleDetection()
     cout << "   - Advantage: O(1) extra space, no node modification.\n";
     cout << "   - Disadvantage: less intuitive than visited set.\n\n";
 
-    LinkedList<int> demo;
+    CycleLinkedList<int> demo;
     demo.Append(1);
     demo.Append(2);
     demo.Append(3);
@@ -40,8 +42,6 @@ void BrainstormCycleDetection()
 
     cout << "Demo after creating cycle (1 -> 2 -> 3 -> 4 -> 2 ...): "
          << (demo.HasCycle() ? "Cycle found" : "No cycle") << endl;
-
-    demo.BreakCycle();
 }
 
 void summedList(LinkedList<int> &l)

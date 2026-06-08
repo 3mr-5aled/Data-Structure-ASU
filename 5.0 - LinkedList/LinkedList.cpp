@@ -161,83 +161,8 @@ void LinkedList<T>::Reverse()
 
 // extra
 template <class T>
-bool LinkedList<T>::HasCycle()
-{
-    Node<T> *slow = head;
-    Node<T> *fast = head;
-
-    while (fast != NULL && fast->next != NULL)
-    {
-        slow = slow->next;
-        fast = fast->next->next;
-
-        if (slow == fast)
-            return true;
-    }
-
-    return false;
-}
-
-// extra
-template <class T>
-void LinkedList<T>::CreateCycleToPosition(int pos)
-{
-    assert(pos >= 0 && pos < count);
-    if (head == NULL || tail == NULL)
-        return;
-
-    Node<T> *target = head;
-    for (int i = 0; i < pos; i++)
-        target = target->next;
-
-    tail->next = target;
-}
-
-// extra
-template <class T>
-void LinkedList<T>::BreakCycle()
-{
-    // If there is no cycle, nothing to fix.
-    Node<T> *slow = head;
-    Node<T> *fast = head;
-    bool hasCycle = false;
-
-    while (fast != NULL && fast->next != NULL)
-    {
-        slow = slow->next;
-        fast = fast->next->next;
-        if (slow == fast)
-        {
-            hasCycle = true;
-            break;
-        }
-    }
-
-    if (!hasCycle)
-        return;
-
-    slow = head;
-    while (slow != fast)
-    {
-        slow = slow->next;
-        fast = fast->next;
-    }
-
-    Node<T> *cycleStart = slow;
-    Node<T> *lastInCycle = cycleStart;
-    while (lastInCycle->next != cycleStart)
-        lastInCycle = lastInCycle->next;
-
-    lastInCycle->next = NULL;
-    tail = lastInCycle;
-}
-
-template <class T>
 LinkedList<T>::~LinkedList(void)
 {
-    // extra: ensure we break any cycles before trying to delete nodes
-    BreakCycle();
-
     while (count != 0)
         DeleteAt(0);
 }

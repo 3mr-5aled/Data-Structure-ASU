@@ -19,19 +19,16 @@ public:
     Node<T> *head;
     Node<T> *tail;
 
-    LinkedList();                    // O(1)
-    int Length();                    // O(1)
-    T At(int);                       // O(n)
-    void InsertAt(int, T);           // O(n)
-    void Append(T);                  // O(1)
-    void DeleteAt(int);              // O(n)
-    void Display();                  // O(n) - Lab 5 additional function
-    void MoveNode(int, int);         // O(n) - Lab 5 additional function
-    void Reverse();                  // O(n) - extra
-    void insertSorted(int);          // O(n) - extra
-    void RemoveDuplicates();         // O(n^2) - extra
-    bool HasCycle();                 // O(n)
-    void CreateCycleToPosition(int); // O(n)
-    void BreakCycle();               // O(n)
-    ~LinkedList(void);               // O(n)
+    LinkedList();            // O(1)
+    int Length();            // O(1)
+    T At(int);               // O(n)
+    void InsertAt(int, T);   // O(n)
+    void Append(T);          // O(1)
+    void DeleteAt(int);      // O(n)
+    void Display();          // O(n) - Lab 5 additional function
+    void MoveNode(int, int); // O(n) - Lab 5 additional function
+    void Reverse();          // O(n) - extra
+    void insertSorted(int);  // O(n) - extra
+    void RemoveDuplicates(); // O(n^2) - extra
+    ~LinkedList(void);       // O(n)
 };
