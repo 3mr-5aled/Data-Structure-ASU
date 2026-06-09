@@ -8,8 +8,7 @@ using namespace std;
 // RemoveRange
 void RemoveRange(set<int> &s, int L, int R)
 {
-    set<int>::iterator it = s.begin();
-    while (it != s.end())
+    for (auto it = s.begin(); it != s.end();)
     {
         if (*it >= L && *it <= R)
         {
@@ -26,7 +25,7 @@ void RemoveRange(set<int> &s, int L, int R)
 int CountRange(set<int> &s, int L, int R)
 {
     int count = 0;
-    for (set<int>::iterator it = s.begin(); it != s.end(); it++)
+    for (auto it = s.begin(); it != s.end(); it++)
     {
         if (*it >= L && *it <= R)
         {

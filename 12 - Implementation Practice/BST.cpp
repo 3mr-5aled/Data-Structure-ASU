@@ -24,12 +24,6 @@ BST<T>::BST()
 }
 
 template <class T>
-BST<T>::~BST()
-{
-    // empty destructor
-}
-
-template <class T>
 bool BST<T>::contains(T val)
 {
     Node<T> *tmp = findNode(val);
