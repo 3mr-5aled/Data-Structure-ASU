@@ -15,8 +15,17 @@ public:
 	Graph_List();
 	void addEdge(char s, char d, int wt);
 	void removeEdge(char s, char d);
+	// Breadth-First Search starting from a given node
+	void BFS(char start);
+
+	// Depth-First Search starting from a given node (wrapper)
+	void DFS(char start);
 	void printGraph();
 	~Graph_List();
+
+private:
+	// Helper for recursive DFS
+	void dfsUtil(char node, unordered_map<char, bool> &visited);
 };
 
 #endif // GRAPH_LIST_H

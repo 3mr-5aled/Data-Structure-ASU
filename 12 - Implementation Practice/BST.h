@@ -1,4 +1,6 @@
-#pragma once
+#include <iostream>
+using namespace std;
+
 enum Order
 {
     INORDER = 0,
@@ -10,9 +12,9 @@ enum Order
 template <class T>
 class Node
 {
-public:
+    Node<T> *left;
+    Node<T> *right;
     T value;
-    Node<T> *left, *right;
     Node();
     Node(T val);
 };
@@ -24,7 +26,6 @@ class BST
 
 public:
     BST(void);
-    ~BST();
 
     bool contains(T val);
     Node<T> *findNode(T val);
@@ -38,10 +39,10 @@ public:
 
     Node<T> *findParent(T val);
     Node<T> *findMin(Node<T> *start);
+
+    // final 2021 (2nd)
+    Node<T> findMax();
     void remove(T val);
 
-    void removeRange(T min, T max); // lab task
-    int getLevel(T val);            // lab task
-
-    void deleteBST(Node<T> *node);
+    ~BST();
 };

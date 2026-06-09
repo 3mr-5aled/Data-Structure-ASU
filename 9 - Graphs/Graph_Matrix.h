@@ -15,6 +15,9 @@ public:
 
 	void addEdge(int s, int d, int wt);
 	void removeEdge(int s, int d);
+	// BFS and DFS for integer-indexed nodes
+	void BFS(int start);
+	void DFS(int start);
 	void printGraph();
 
 	~Graph_Matrix(); // destructor to free memory

@@ -18,6 +18,10 @@ int main()
     cout << "Graph adjacency matrix:" << endl;
     g.printGraph();
 
+    // Demonstrate BFS and DFS on matrix graph
+    g.BFS(0);
+    g.DFS(0);
+
     Graph_List gl;
     gl.addEdge('A', 'B', 10);
     gl.addEdge('A', 'C', 5);
@@ -28,6 +32,10 @@ int main()
 
     cout << "\nGraph adjacency list:" << endl;
     gl.printGraph();
+
+    // Demonstrate BFS and DFS on adjacency list graph
+    gl.BFS('A');
+    gl.DFS('A');
 
     return 0;
 }

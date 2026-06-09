@@ -4,7 +4,7 @@
 
 using namespace std;
 template <class T>
-inline ArrayList<T>::ArrayList()
+inline Linkedlist<T>::Linkedlist()
 {
     size = 10;
     arr = new T[size];
@@ -12,13 +12,13 @@ inline ArrayList<T>::ArrayList()
 }
 
 template <class T>
-int ArrayList<T>::Length()
+int Linkedlist<T>::Length()
 {
     return count;
 }
 
 template <class T>
-void ArrayList<T>::Append(T item)
+void Linkedlist<T>::Append(T item)
 {
     if (count == size)
     {
@@ -29,7 +29,7 @@ void ArrayList<T>::Append(T item)
 }
 
 template <class T>
-void ArrayList<T>::Expand()
+void Linkedlist<T>::Expand()
 {
     size *= 2;
     T *newArr = new T[size];
@@ -42,13 +42,13 @@ void ArrayList<T>::Expand()
 }
 
 template <class T>
-T ArrayList<T>::at(int index)
+T Linkedlist<T>::at(int index)
 {
     return arr[index];
 }
 
 template <class T>
-void ArrayList<T>::Insert(T item, int index)
+void Linkedlist<T>::Insert(T item, int index)
 {
     assert(index < count);
 
@@ -65,7 +65,7 @@ void ArrayList<T>::Insert(T item, int index)
 }
 
 template <class T>
-void ArrayList<T>::Remove(int index)
+void Linkedlist<T>::Remove(int index)
 {
     assert(index < count);
     for (int i = index; i < count - 1; i++)
@@ -76,7 +76,7 @@ void ArrayList<T>::Remove(int index)
 }
 
 template <class T>
-ArrayList<T>::~ArrayList()
+Linkedlist<T>::~Linkedlist()
 {
     delete[] arr;
 }

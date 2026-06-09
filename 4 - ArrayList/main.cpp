@@ -9,7 +9,7 @@ using namespace std;
 int main()
 {
     // using Arraylist
-    ArrayList<int> L;
+    Linkedlist<int> L;
     L.Append(9);
     L.Append(8);
     L.Append(7);

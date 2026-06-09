@@ -1,4 +1,7 @@
 #include "Graph_Matrix.h"
+#include <queue>
+#include <vector>
+#include <functional>
 
 // Constructor
 Graph_Matrix::Graph_Matrix(int nodesCount)
@@ -63,4 +66,70 @@ Graph_Matrix::~Graph_Matrix()
         delete[] adjMatrix[i];
     }
     delete[] adjMatrix;
+}
+
+// Breadth-First Search (BFS) for adjacency matrix
+// Visits nodes level by level using a queue
+void Graph_Matrix::BFS(int start)
+{
+    if (start < 0 || start >= matrixSize)
+    {
+        cout << "Invalid start node for BFS" << endl;
+        return;
+    }
+
+    vector<bool> visited(matrixSize, false);
+    queue<int> q;
+
+    visited[start] = true;
+    q.push(start);
+
+    cout << "BFS traversal starting at " << start << ": ";
+    while (!q.empty())
+    {
+        int node = q.front();
+        q.pop();
+        cout << node << " ";
+
+        // Look through row `node` to find edges
+        for (int j = 0; j < matrixSize; ++j)
+        {
+            // non-zero weight indicates an edge (weighted graphs assumed)
+            if (adjMatrix[node][j] != 0 && !visited[j])
+            {
+                visited[j] = true;
+                q.push(j);
+            }
+        }
+    }
+    cout << endl;
+}
+
+// DFS (recursive) for adjacency matrix
+// Uses recursion to go as deep as possible before backtracking
+void Graph_Matrix::DFS(int start)
+{
+    if (start < 0 || start >= matrixSize)
+    {
+        cout << "Invalid start node for DFS" << endl;
+        return;
+    }
+
+    vector<bool> visited(matrixSize, false);
+    cout << "DFS traversal starting at " << start << ": ";
+
+    // inner lambda for recursion
+    function<void(int)> dfsRec = [&](int node)
+    {
+        visited[node] = true;
+        cout << node << " ";
+        for (int j = 0; j < matrixSize; ++j)
+        {
+            if (adjMatrix[node][j] != 0 && !visited[j])
+                dfsRec(j);
+        }
+    };
+
+    dfsRec(start);
+    cout << endl;
 }
