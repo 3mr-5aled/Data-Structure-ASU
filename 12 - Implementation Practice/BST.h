@@ -48,6 +48,7 @@ public:
     // final 2024
     void createTree(vector<T> arr);
     void createBalancedTree(vector<T> arr, int start, int end);
+    void createTree2(int arr[], int size);
 
     ~BST();
 };

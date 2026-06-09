@@ -279,3 +279,40 @@ void BST<T>::createBalancedTree(vector<T> arr, int start, int end)
     createBalancedTree(arr, start, mid - 1);
     createBalancedTree(arr, mid + 1, end);
 }
+
+template <class T>
+void BST<T>::createTree2(int arr[], int size)
+{
+    sort(arr, arr + size);
+    int med = size / 2;
+    if (med % 2 == 0)
+    {
+        for (int i = med; i < size; i++)
+        {
+            insert(arr[i]);
+        }
+        int var = 0;
+
+        for (int i = med - 2; i >= 0; i--)
+        {
+            insert(arr[i]);
+            if (var == 0)
+            {
+
+                insert(arr[med - 1]);
+            }
+            var++;
+        }
+    }
+    else
+    {
+        for (int i = med; i < size; i++)
+        {
+            insert(arr[i]);
+        }
+        for (int i = med - 1; i >= 0; i--)
+        {
+            insert(arr[i]);
+        }
+    }
+}
