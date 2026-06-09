@@ -1,120 +1,91 @@
 #include <iostream>
 #include <queue>
-#include <string>
 #include <unordered_map>
-#include <vector>
-
 using namespace std;
 
-struct Request
+class Request
 {
-    int id;
-    string description;
+public:
+    int request_id;
     int importance;
-    char status;
+    string request_description;
+    char status; // n - new, d - done
+    Request() {} // Default constructor
+    Request(int id, string description, int imp, char stat = 'n')
+    {
+        request_id = id;
+        request_description = description;
+        importance = imp;
+        status = stat; // Initialize status to the provided value
+    }
 };
 
-unordered_map<int, Request> request_table;
-queue<int> high_priority_requests;
-queue<int> medium_priority_requests;
-queue<int> low_priority_requests;
-vector<int> request_order;
-
-void request_service(int request_id, string request_description, int importance)
+class HelpDesk
 {
-    Request request;
-    request.id = request_id;
-    request.description = request_description;
-    request.importance = importance;
-    request.status = 'n';
+public:
+    // (request_id, Request)
+    unordered_map<int, Request> requests;
 
-    request_table[request_id] = request;
-    request_order.push_back(request_id);
+    // (importance, request_id)
+    priority_queue<pair<int, int>> importance;
 
-    if (importance == 3)
+    void request_service(int request_id, string request_description, int importance)
     {
-        high_priority_requests.push(request_id);
+        requests[request_id] = Request(request_id, request_description, importance);
+        this->importance.push(make_pair(importance, request_id));
     }
-    else if (importance == 2)
-    {
-        medium_priority_requests.push(request_id);
-    }
-    else
-    {
-        low_priority_requests.push(request_id);
-    }
-}
 
-void print_requests()
-{
-    for (int request_id : request_order)
+    void print_requests()
     {
-        const Request &request = request_table[request_id];
-        cout << request.id << ' ' << request.status << '\n';
-    }
-}
-
-int get_next_request()
-{
-    auto fetch_next = [](queue<int> &requests) -> int
-    {
-        while (!requests.empty())
+        for (auto it = requests.begin(); it != requests.end(); it++)
         {
-            int request_id = requests.front();
-            requests.pop();
+            cout << "Request: " << (it)->second.request_id << " , Description: " << (it)->second.request_description << " , Status: " << (it)->second.status << endl;
+        }
+    }
 
-            auto it = request_table.find(request_id);
-            if (it != request_table.end() && it->second.status == 'n')
+    int get_next_request()
+    {
+        while (!importance.empty())
+        {
+            int request_id = importance.top().second;
+            if (requests[request_id].status == 'n')
             {
-                it->second.status = 'd';
                 return request_id;
             }
+            importance.pop();
         }
-
-        return -1;
-    };
-
-    int next_request = fetch_next(high_priority_requests);
-    if (next_request != -1)
-    {
-        return next_request;
+        return -1; // No new requests available
     }
 
-    next_request = fetch_next(medium_priority_requests);
-    if (next_request != -1)
+    void set_request_status(int request_id, char status)
     {
-        return next_request;
+        if (requests.find(request_id) != requests.end())
+        {
+            requests[request_id].status = status;
+        }
     }
-
-    return fetch_next(low_priority_requests);
-}
-
-void set_request_status(int request_id, char status)
-{
-    auto it = request_table.find(request_id);
-    if (it != request_table.end())
-    {
-        it->second.status = status;
-    }
-}
+};
 
 int main()
 {
-    request_service(101, "Reset password", 2);
-    request_service(102, "System down", 3);
-    request_service(103, "Update profile", 1);
-    request_service(104, "Cannot login", 3);
+    HelpDesk helpDesk;
 
-    cout << "All requests:\n";
-    print_requests();
+    helpDesk.request_service(1, "Fix server issue", 1);
+    helpDesk.request_service(2, "Fix printer", 1);
+    helpDesk.request_service(3, "Fix Phone", 2);
+    helpDesk.request_service(4, "Fix Laptop", 3);
+    helpDesk.request_service(5, "Fix Mouse", 2);
+    helpDesk.request_service(6, "Fix Keyboard", 1);
+    helpDesk.request_service(7, "Update software", 3);
 
-    cout << "Next request: " << get_next_request() << '\n';
-    cout << "Next request: " << get_next_request() << '\n';
+    helpDesk.print_requests();
 
-    set_request_status(103, 'd');
-
-    cout << "After updates:\n";
-    print_requests();
+    //  n - new, d - done
+    cout << "Next request to process: " << helpDesk.get_next_request() << endl;
+    helpDesk.set_request_status(7, 'd');
+    cout << "Next request to process: " << helpDesk.get_next_request() << endl;
+    helpDesk.set_request_status(4, 'd');
+    cout << "Next request to process: " << helpDesk.get_next_request() << endl;
 
     return 0;
 }

@@ -24,11 +24,17 @@ public:
     int Length();
     T At(int pos);
     void insertAt(int pos, T val);
-    void Append(T val);
+
     void DeleteAt(int pos);
     void Display();
     // exam 2021 (1st)
     void Reverse();
     void MoveZeros();
+
+    // exam 2025
+    void Append(T val);
+    void Swap();
+    void Rotate();
+
     ~Linkedlist();
 };

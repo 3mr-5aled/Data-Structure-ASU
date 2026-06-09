@@ -42,6 +42,7 @@ T Linkedlist<T>::At(int pos)
     return temp->value;
 }
 
+// Final 2025
 template <class T>
 void Linkedlist<T>::Append(T val)
 {
@@ -192,4 +193,46 @@ void Linkedlist<T>::insertAt(int pos, T val)
         tmp->next = newNode;
     }
     count++;
+}
+
+// Final 2025
+template <class T>
+void Linkedlist<T>::Swap()
+{
+
+    Node<T> *curr = head;
+    Node<T> *next = curr->next;
+    while (count)
+    {
+        T tmp = curr->value;
+        curr->value = next->value;
+        next->value = tmp;
+        curr = next->next;
+        if (!curr || !curr->next)
+        {
+            return;
+        }
+        next = curr->next;
+    }
+}
+
+template <class T>
+void Linkedlist<T>::Rotate()
+{
+    if (head == tail)
+    {
+        return;
+    }
+
+    Node<T> *last = head;
+    Node<T> *tmp = tail;
+
+    while (last->next != tail)
+    {
+        last = last->next
+    }
+    last->next = nullptr;
+    tmp->next = head;
+    head = tmp;
+    tail = last;
 }

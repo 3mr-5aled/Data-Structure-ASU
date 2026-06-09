@@ -29,7 +29,6 @@ public:
 
     bool contains(T val);
     Node<T> *findNode(T val);
-    void insert(T val);
 
     void traverse(Order order);
 
@@ -41,8 +40,13 @@ public:
     Node<T> *findMin(Node<T> *start);
 
     // final 2021 (2nd)
-    Node<T> findMax();
-    void remove(T val);
+    void Remove(T val);
+    // final 2024 & 21
+    void insert(T val);
+    Node<T> *Max();
+
+    // final 2024
+    void createTree(T arr[]);
 
     ~BST();
 };

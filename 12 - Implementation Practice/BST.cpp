@@ -179,7 +179,7 @@ Node<T> *BST<T>::findMin(Node<T> *start)
 }
 
 template <class T>
-void BST<T>::remove(T val)
+void BST<T>::Remove(T val)
 {
     assert(contains(val));
     Node<T> *n = findNode(val);
@@ -247,7 +247,7 @@ void BST<T>::remove(T val)
 }
 
 template <class T>
-Node<T> *BST<T>::findMax()
+Node<T> *BST<T>::Max()
 {
     Node<T> *tmp = root;
     assert(tmp != nullptr);
@@ -256,4 +256,14 @@ Node<T> *BST<T>::findMax()
         tmp = tmp->right;
     }
     return tmp;
+}
+
+template <class T>
+void BST<T>::createTree(T arr[])
+{
+    int size = arr.length();
+    for (int i = 0; i < size; i++)
+    {
+        insert(arr[i]);
+    }
 }
