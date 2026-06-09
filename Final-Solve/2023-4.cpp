@@ -27,12 +27,12 @@ public:
     unordered_map<int, Request> requests;
 
     // (importance, request_id)
-    priority_queue<pair<int, int>> importance;
+    priority_queue<pair<int, int>> priority;
 
     void request_service(int request_id, string request_description, int importance)
     {
         requests[request_id] = Request(request_id, request_description, importance);
-        this->importance.push(make_pair(importance, request_id));
+        priority.push(make_pair(importance, request_id));
     }
 
     void print_requests()
@@ -45,14 +45,14 @@ public:
 
     int get_next_request()
     {
-        while (!importance.empty())
+        while (!priority.empty())
         {
-            int request_id = importance.top().second;
+            int request_id = priority.top().second;
             if (requests[request_id].status == 'n')
             {
                 return request_id;
             }
-            importance.pop();
+            priority.pop();
         }
         return -1; // No new requests available
     }

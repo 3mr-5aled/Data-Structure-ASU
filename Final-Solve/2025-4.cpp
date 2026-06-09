@@ -37,6 +37,7 @@ public:
     void vote_candidate(int id)
     {
         candidates_map[id].votes++;
+        // candidates.push({candidates_map[id].votes, id});
         candidates.push(make_pair(candidates_map[id].votes, id));
     }
     void print_candidates_votes()
