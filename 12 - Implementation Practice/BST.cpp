@@ -1,5 +1,7 @@
 #include "BST.h"
 #include <iostream>
+#include <vector>
+#include <algorithm>
 
 template <class T>
 Node<T>::Node()
@@ -259,11 +261,21 @@ Node<T> *BST<T>::Max()
 }
 
 template <class T>
-void BST<T>::createTree(T arr[])
+void BST<T>::createTree(vector<T> arr)
 {
-    int size = arr.length();
-    for (int i = 0; i < size; i++)
-    {
-        insert(arr[i]);
-    }
+    sort(arr.begin(), arr.end());
+
+    createBalancedTree(arr, 0, arr.size() - 1);
+}
+
+template <class T>
+void BST<T>::createBalancedTree(vector<T> arr, int start, int end)
+{
+    if (start > end)
+        return;
+
+    int mid = (start + end) / 2;
+    insert(arr[mid]);
+    createBalancedTree(arr, start, mid - 1);
+    createBalancedTree(arr, mid + 1, end);
 }

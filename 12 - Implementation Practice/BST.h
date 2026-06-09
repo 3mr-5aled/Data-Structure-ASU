@@ -46,7 +46,8 @@ public:
     Node<T> *Max();
 
     // final 2024
-    void createTree(T arr[]);
+    void createTree(vector<T> arr);
+    void createBalancedTree(vector<T> arr, int start, int end);
 
     ~BST();
 };
