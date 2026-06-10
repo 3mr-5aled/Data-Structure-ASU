@@ -6,7 +6,7 @@ using namespace std;
 
 string PreserveSentenceUsingLinkedQueue(const string &sentence)
 {
-    LinkedQueue<char> charQueue;
+    Queue<char> charQueue;
     string result;
 
     for (size_t i = 0; i < sentence.length(); i++)
@@ -34,7 +34,7 @@ void BrainstormSentenceUsingQueue()
 int main()
 {
     // Old demo kept for basic queue operations.
-    LinkedQueue<int> q;
+    Queue<int> q;
     q.Enqueue(5);
     q.Enqueue(8);
     q.Dequeue();

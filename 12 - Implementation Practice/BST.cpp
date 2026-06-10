@@ -38,7 +38,7 @@ Node<T> *BST<T>::findNode(T val)
     {
         if (temp->value < val)
             temp = temp->right;
-        if (temp->value > val)
+        else if (temp->value > val)
             temp = temp->left;
         else
             return temp;
@@ -76,7 +76,7 @@ void BST<T>::insert(T val)
                     temp = temp->left;
                 }
             }
-            else
+            else if (temp->value < val)
             {
                 // right
                 if (temp->right == NULL)
@@ -88,6 +88,10 @@ void BST<T>::insert(T val)
                 {
                     temp = temp->right;
                 }
+            }
+            else
+            {
+                break;
             }
         }
     }

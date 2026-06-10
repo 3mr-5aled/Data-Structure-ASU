@@ -5,7 +5,7 @@
 using namespace std;
 
 template <class T>
-Linkedlist<T>::Linkedlist(int size)
+Queue<T>::Queue(int size)
 {
     capacity = size;
     front = back = -1;
@@ -14,7 +14,7 @@ Linkedlist<T>::Linkedlist(int size)
 }
 
 template <class T>
-void Linkedlist<T>::enqueue(T val)
+void Queue<T>::enqueue(T val)
 {
     assert(!isFull());
     if (isEmpty())
@@ -27,7 +27,7 @@ void Linkedlist<T>::enqueue(T val)
 }
 
 template <class T>
-void Linkedlist<T>::dequeue()
+void Queue<T>::dequeue()
 {
     assert(!isEmpty());
     if (elements == 1)
@@ -43,26 +43,26 @@ void Linkedlist<T>::dequeue()
 }
 
 template <class T>
-bool Linkedlist<T>::isFull()
+bool Queue<T>::isFull()
 {
     return elements == capacity;
 }
 
 template <class T>
-bool Linkedlist<T>::isEmpty()
+bool Queue<T>::isEmpty()
 {
     return elements == 0;
 }
 
 template <class T>
-T Linkedlist<T>::Front()
+T Queue<T>::Front()
 {
     assert(!isEmpty());
     return arr[front];
 }
 
 template <class T>
-Linkedlist<T>::~Linkedlist()
+Queue<T>::~Queue()
 {
     delete[] arr;
 }

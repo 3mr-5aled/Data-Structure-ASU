@@ -18,7 +18,7 @@ void TaskOrganizer()
 
     cout << "Welcome to the Task Organizer!" << endl;
     bool Exitflag = false;
-    Linkedlist<Task> taskQueue(100);
+    Queue<Task> taskQueue(100);
     while (!Exitflag)
     {
         cout << "Please select an option:" << endl;

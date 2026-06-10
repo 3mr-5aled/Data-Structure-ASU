@@ -12,17 +12,17 @@ public:
 };
 
 template <class T>
-class LinkedQueue
+class Queue
 {
     QueueNode<T> *front;
     QueueNode<T> *rear;
     int size;
 
 public:
-    LinkedQueue(void);  // O(1)
-    bool isEmpty();     // O(1)
-    void Enqueue(T);    // O(1)
-    T Dequeue();        // O(1)
-    void Clear();       // O(n)
-    ~LinkedQueue(void); // O(n)
+    Queue(void);     // O(1)
+    bool isEmpty();  // O(1)
+    void Enqueue(T); // O(1)
+    T Dequeue();     // O(1)
+    void Clear();    // O(n)
+    ~Queue(void);    // O(n)
 };

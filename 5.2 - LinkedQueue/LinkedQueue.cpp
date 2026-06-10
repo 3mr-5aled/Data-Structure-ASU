@@ -18,7 +18,7 @@ QueueNode<T>::QueueNode(T val)
 }
 
 template <class T>
-LinkedQueue<T>::LinkedQueue(void)
+Queue<T>::Queue(void)
 {
     front = NULL;
     rear = NULL;
@@ -26,13 +26,13 @@ LinkedQueue<T>::LinkedQueue(void)
 }
 
 template <class T>
-bool LinkedQueue<T>::isEmpty()
+bool Queue<T>::isEmpty()
 {
     return (size == 0);
 }
 
 template <class T>
-void LinkedQueue<T>::Enqueue(T val)
+void Queue<T>::Enqueue(T val)
 {
     QueueNode<T> *newNode = new QueueNode<T>(val);
     if (isEmpty())
@@ -48,7 +48,7 @@ void LinkedQueue<T>::Enqueue(T val)
 }
 
 template <class T>
-T LinkedQueue<T>::Dequeue()
+T Queue<T>::Dequeue()
 {
     if (isEmpty())
     {
@@ -69,7 +69,7 @@ T LinkedQueue<T>::Dequeue()
 }
 
 template <class T>
-void LinkedQueue<T>::Clear()
+void Queue<T>::Clear()
 {
     QueueNode<T> *temp;
     while (front != NULL)
@@ -82,7 +82,7 @@ void LinkedQueue<T>::Clear()
 }
 
 template <class T>
-LinkedQueue<T>::~LinkedQueue(void)
+Queue<T>::~Queue(void)
 {
     Clear();
 }

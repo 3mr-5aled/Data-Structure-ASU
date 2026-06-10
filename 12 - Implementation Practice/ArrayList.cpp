@@ -5,7 +5,7 @@
 using namespace std;
 
 template <class T>
-Linkedlist<T>::Linkedlist()
+ArrayList<T>::ArrayList()
 {
     elements = 0;
     size = 10;
@@ -13,7 +13,7 @@ Linkedlist<T>::Linkedlist()
 }
 
 template <class T>
-void Linkedlist<T>::Append(T val)
+void ArrayList<T>::Append(T val)
 {
     if (elements == size)
     {
@@ -24,7 +24,7 @@ void Linkedlist<T>::Append(T val)
 }
 
 template <class T>
-void Linkedlist<T>::Expand()
+void ArrayList<T>::Expand()
 {
     size *= 2;
     T *newArr = new T[size];
@@ -37,7 +37,7 @@ void Linkedlist<T>::Expand()
 }
 
 template <class T>
-void Linkedlist<T>::insertAt(int pos, T val)
+void ArrayList<T>::insertAt(int pos, T val)
 {
     assert(pos < elements);
     if (elements == size)
@@ -53,7 +53,7 @@ void Linkedlist<T>::insertAt(int pos, T val)
 }
 
 template <class T>
-void Linkedlist<T>::DeleteAt(int pos)
+void ArrayList<T>::DeleteAt(int pos)
 {
     assert(pos < elements);
     for (int i = pos; i < elements - 1; i++)
@@ -64,19 +64,19 @@ void Linkedlist<T>::DeleteAt(int pos)
 }
 
 template <class T>
-T Linkedlist<T>::At(int pos)
+T ArrayList<T>::At(int pos)
 {
     return arr[pos];
 }
 
 template <class T>
-int Linkedlist<T>::Length()
+int ArrayList<T>::Length()
 {
     return elements;
 }
 
 template <class T>
-Linkedlist<T>::~Linkedlist()
+ArrayList<T>::~ArrayList()
 {
     delete[] arr;
 }

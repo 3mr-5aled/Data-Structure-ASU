@@ -4,7 +4,7 @@
 
 using namespace std;
 template <class T>
-inline Linkedlist<T>::Linkedlist()
+inline Queue<T>::Queue()
 {
     size = 10;
     arr = new T[size];
@@ -12,13 +12,13 @@ inline Linkedlist<T>::Linkedlist()
 }
 
 template <class T>
-int Linkedlist<T>::Length()
+int Queue<T>::Length()
 {
     return count;
 }
 
 template <class T>
-void Linkedlist<T>::Append(T item)
+void Queue<T>::Append(T item)
 {
     if (count == size)
     {
@@ -29,7 +29,7 @@ void Linkedlist<T>::Append(T item)
 }
 
 template <class T>
-void Linkedlist<T>::Expand()
+void Queue<T>::Expand()
 {
     size *= 2;
     T *newArr = new T[size];
@@ -42,13 +42,13 @@ void Linkedlist<T>::Expand()
 }
 
 template <class T>
-T Linkedlist<T>::at(int index)
+T Queue<T>::at(int index)
 {
     return arr[index];
 }
 
 template <class T>
-void Linkedlist<T>::Insert(T item, int index)
+void Queue<T>::Insert(T item, int index)
 {
     assert(index < count);
 
@@ -65,7 +65,7 @@ void Linkedlist<T>::Insert(T item, int index)
 }
 
 template <class T>
-void Linkedlist<T>::Remove(int index)
+void Queue<T>::Remove(int index)
 {
     assert(index < count);
     for (int i = index; i < count - 1; i++)
@@ -76,7 +76,7 @@ void Linkedlist<T>::Remove(int index)
 }
 
 template <class T>
-Linkedlist<T>::~Linkedlist()
+Queue<T>::~Queue()
 {
     delete[] arr;
 }

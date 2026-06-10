@@ -3,7 +3,7 @@
 using namespace std;
 
 template <class T>
-class Linkedlist
+class Queue
 {
     int front, back, elements, size;
     T *arr;
@@ -15,8 +15,8 @@ class Linkedlist
     // Empty: Returns whether the queue is empty.
 
 public:
-    Linkedlist();
-    Linkedlist(int size);
+    Queue();
+    Queue(int size);
 
     int Length();
     void Enqueue(T val);
@@ -24,5 +24,5 @@ public:
     T Front();
     bool Empty();
 
-    ~Linkedlist();
+    ~Queue();
 }

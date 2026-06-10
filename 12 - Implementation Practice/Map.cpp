@@ -101,6 +101,7 @@ void Map<T>::find(char key)
                 cout << item << " ";
             }
             cout << endl;
+            return;
         }
     }
 

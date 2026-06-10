@@ -13,14 +13,14 @@ public:
 };
 
 template <class T>
-class Linkedlist
+class LinkedList
 {
     Node<T> *head;
     Node<T> *tail;
     int count;
 
 public:
-    Linkedlist();
+    LinkedList();
     int Length();
     T At(int pos);
     void insertAt(int pos, T val);
@@ -36,5 +36,5 @@ public:
     void Swap();
     void Rotate();
 
-    ~Linkedlist();
+    ~LinkedList();
 };

@@ -18,20 +18,20 @@ Node<T>::Node(T val)
 }
 
 template <class T>
-Linkedlist<T>::Linkedlist(T val)
+LinkedList<T>::Linkedlist(T val)
 {
     head = tail = 0;
     count = 0;
 }
 
 template <class T>
-int Linkedlist<T>::Length()
+int LinkedQueue<T>::Length()
 {
     return count;
 }
 
 template <class T>
-T Linkedlist<T>::At(int pos)
+T LinkedQueue<T>::At(int pos)
 {
     assert(pos >= 0 && pos < count);
     Node<T> *temp = head;
@@ -44,7 +44,7 @@ T Linkedlist<T>::At(int pos)
 
 // Final 2025
 template <class T>
-void Linkedlist<T>::Append(T val)
+void LinkedList<T>::Append(T val)
 {
     Node<T> *newNode = new Node(val);
     if (count == 0)
@@ -59,7 +59,7 @@ void Linkedlist<T>::Append(T val)
     count++;
 }
 template <class T>
-void Linkedlist<T>::insertAt(int pos, T val)
+void LinkedList<T>::insertAt(int pos, T val)
 {
     assert(pos >= 0 && pos < count);
     Node<T> *tmp = head;
@@ -82,7 +82,7 @@ void Linkedlist<T>::insertAt(int pos, T val)
 }
 
 template <class T>
-void Linkedlist<T>::DeleteAt(int pos)
+void LinkedList<T>::DeleteAt(int pos)
 {
     assert(pos >= 0 && pos < count);
     Node<T> *tmp = head;
@@ -109,7 +109,7 @@ void Linkedlist<T>::DeleteAt(int pos)
 }
 
 template <class T>
-void Linkedlist<T>::Display()
+void LinkedList<T>::Display()
 {
     Node<T> *temp = head;
     while (temp != nullptr)
@@ -120,7 +120,7 @@ void Linkedlist<T>::Display()
 }
 
 template <class T>
-Linkedlist<T>::~Linkedlist()
+LinkedList<T>::~LinkedList()
 {
     while (head != nullptr)
     {
@@ -131,7 +131,7 @@ Linkedlist<T>::~Linkedlist()
 // Final 2021 (1st)
 
 template <class T>
-void Linkedlist<T>::Reverse()
+void LinkedList<T>::Reverse()
 {
     if (head == NULL || head->next == NULL)
         return;
@@ -142,7 +142,7 @@ void Linkedlist<T>::Reverse()
 
     tail = head;
 
-    while (curr != NULL)
+    while (curr != NULL && curr->next != NULL)
     {
         next = curr->next;
         curr->next = prev;
@@ -154,7 +154,7 @@ void Linkedlist<T>::Reverse()
 }
 
 template <class T>
-void Linkedlist<T>::MoveZeroes()
+void LinkedList<T>::MoveZeroes()
 {
     int i = 0;
     for (int index = 0; index < count; index++)
@@ -172,7 +172,7 @@ void Linkedlist<T>::MoveZeroes()
 // Final 2021 (2nd)
 
 template <class T>
-void Linkedlist<T>::insertAt(int pos, T val)
+void LinkedList<T>::insertAt(int pos, T val)
 {
     assert(pos >= 0 && pos <= count);
     Node<T> *newNode = new Node(val);
@@ -197,7 +197,7 @@ void Linkedlist<T>::insertAt(int pos, T val)
 
 // Final 2025
 template <class T>
-void Linkedlist<T>::Swap()
+void LinkedList<T>::Swap()
 {
 
     Node<T> *curr = head;
@@ -217,7 +217,7 @@ void Linkedlist<T>::Swap()
 }
 
 template <class T>
-void Linkedlist<T>::Rotate()
+void LinkedList<T>::Rotate()
 {
     if (head == tail)
     {

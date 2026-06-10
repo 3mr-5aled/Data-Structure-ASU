@@ -3,13 +3,13 @@
 using namespace std;
 
 template <class T>
-class Linkedlist
+class ArrayList
 {
     int elements, size;
     T *arr;
 
 public:
-    Linkedlist();
+    ArrayList();
 
     int Length();
     void Append(T val);
@@ -18,5 +18,5 @@ public:
     void DeleteAt(int pos);
     T At(int pos);
 
-    ~Linkedlist();
+    ~ArrayList();
 }

@@ -1,6 +1,6 @@
 #pragma once
 template <class T>
-class Linkedlist
+class Queue
 {
     T *arr;
     int front;
@@ -9,11 +9,11 @@ class Linkedlist
     int elements;
 
 public:
-    Linkedlist(int size);
+    Queue(int size);
     void enqueue(T val);
     void dequeue();
     bool isFull();
     bool isEmpty();
     T Front();
-    ~Linkedlist(void);
+    ~Queue(void);
 };
