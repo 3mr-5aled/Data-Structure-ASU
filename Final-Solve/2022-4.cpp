@@ -25,10 +25,8 @@ void print_top_products_ids()
     for (auto &p : productCount)
     {
         maxHeap.push({p.second, p.first});
-        if (maxHeap.size() > 5)
-            maxHeap.pop();
     }
-    while (!maxHeap.empty())
+    for (int i = 0; i < TOP && !maxHeap.empty(); i++)
     {
         cout << maxHeap.top().second << " ";
         maxHeap.pop();
